@@ -14,8 +14,8 @@ ghc-options:
 - -Wall
 # as recommended in:
 # https://functor.tokyo/blog/2017-07-28-ghc-warnings-you-should-enable
-- -Wincomplete-uni-patterns
-- -Wincomplete-record-updates
+- -fwarn-incomplete-uni-patterns
+- -fwarn-incomplete-record-updates
 - -Werror
 - -O2
 dependencies:

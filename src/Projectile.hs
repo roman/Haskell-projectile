@@ -10,10 +10,11 @@ This module provides utility functions to gather various paths of a project
 -}
 module Projectile (getProjectRootDir) where
 
-import Protolude hiding (catch)
+import Protolude hiding (catch, (<>))
 
 import Control.DeepSeq        (NFData)
 import Control.Exception.Safe (MonadCatch, MonadThrow, catch, throwM)
+import Data.Monoid            ((<>))
 import Data.Vector            (Vector)
 import Path                   (Abs, Dir, Path, Rel, parent, parseRelFile, (</>))
 import Path.IO                (isLocationOccupied)
