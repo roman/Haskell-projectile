@@ -1,17 +1,17 @@
-{-# LANGUAGE DeriveGeneric #-}
-{-# LANGUAGE DeriveAnyClass #-}
+{-# LANGUAGE DeriveAnyClass      #-}
+{-# LANGUAGE DeriveGeneric       #-}
+{-# LANGUAGE NoImplicitPrelude   #-}
+{-# LANGUAGE OverloadedStrings   #-}
 {-# LANGUAGE ScopedTypeVariables #-}
-{-# LANGUAGE OverloadedStrings #-}
-{-# LANGUAGE NoImplicitPrelude #-}
 module Projectile where
 
 import Protolude hiding (catch)
 
-import Control.Exception.Safe (MonadThrow, MonadCatch, catch, throwM)
-import Control.DeepSeq (NFData)
-import Data.Vector (Vector)
-import Path ((</>), Path, Abs, Rel, Dir, parseRelFile, parent)
-import Path.IO (isLocationOccupied)
+import Control.DeepSeq        (NFData)
+import Control.Exception.Safe (MonadCatch, MonadThrow, catch, throwM)
+import Data.Vector            (Vector)
+import Path                   (Abs, Dir, Path, Rel, parent, parseRelFile, (</>))
+import Path.IO                (isLocationOccupied)
 
 import qualified Data.Vector as V
 

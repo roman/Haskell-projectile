@@ -1,19 +1,19 @@
-{-# LANGUAGE QuasiQuotes #-}
-{-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE NoImplicitPrelude #-}
+{-# LANGUAGE OverloadedStrings #-}
+{-# LANGUAGE QuasiQuotes       #-}
 module Main where
 
 import Protolude
 
 import qualified Data.Text as T
 
-import Path ((</>), reldir, toFilePath)
+import Path    (reldir, toFilePath, (</>))
 import Path.IO (getCurrentDir, listDirRecur)
 
-import Test.Tasty (TestTree, defaultMainWithIngredients, testGroup)
-import Test.Tasty.HUnit (testCase, assertEqual)
-import Test.Tasty.Runners (listingTests, consoleTestReporter)
+import Test.Tasty                   (TestTree, defaultMainWithIngredients, testGroup)
+import Test.Tasty.HUnit             (assertEqual, testCase)
 import Test.Tasty.Ingredients.Rerun (rerunningTests)
+import Test.Tasty.Runners           (consoleTestReporter, listingTests)
 
 import Projectile (getProjectRootDir)
 
@@ -45,7 +45,7 @@ getProjectRootDirTests =
           root </> [reldir|test/fixtures/recurring-mark-file|]
 
       (dirs, _files) <- listDirRecur rootDirProject
-      forM_ dirs $ \dir -> do
+      forM_ dirs $ \dir ->
         unless (".svn/" `T.isSuffixOf` T.pack (toFilePath dir)) $ do
           rootDirProject' <- getProjectRootDir dir
           assertEqual ("doesn't return the root of the project: " <> show dir)

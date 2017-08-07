@@ -37,7 +37,6 @@ resolver: lts-9.0
 # will not be run. This is useful for tweaking upstream packages.
 packages:
 - .
-- examples/projectile-example
 # The following packages have been ignored due to package name conflict
 # with other packages.
 #- libraries/projectile
