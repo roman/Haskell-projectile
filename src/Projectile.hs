@@ -3,7 +3,12 @@
 {-# LANGUAGE NoImplicitPrelude   #-}
 {-# LANGUAGE OverloadedStrings   #-}
 {-# LANGUAGE ScopedTypeVariables #-}
-module Projectile where
+{-
+Module: Projectile
+
+This module provides utility functions to gather various paths of a project
+-}
+module Projectile (getProjectRootDir) where
 
 import Protolude hiding (catch)
 
@@ -18,6 +23,8 @@ import qualified Data.Vector as V
 --------------------------------------------------------------------------------
 
 data ProjectileException
+  -- | Error thrown when calling project function from
+  -- a path that does not not belong to any project
   = ProjectRootNotFound
   deriving (Generic, NFData, Show, Eq)
 
@@ -29,12 +36,14 @@ data WalkAction
   | WalkInvalid
   deriving (Generic, NFData, Show, Eq)
 
+--------------------------------------------------------------------------------
+
 isRoot :: Path Abs Dir -> Bool
 isRoot path =
   parent path == path
 
--- | A list of files considered to mark the root of a project. The topmost match
--- has precedence.
+-- | A list of files considered to mark the root of a project. The top-most
+-- match has precedence.
 projectRootTopLangMarkFiles :: Vector FilePath
 projectRootTopLangMarkFiles =
   V.fromList
@@ -63,8 +72,8 @@ projectRootTopLangMarkFiles =
     , "GTAGS"              -- GNU Global tags
     ]
 
--- | A list of files considered to mark the root of a project. The topmost match
--- has precedence.
+-- | A list of files considered to mark the root of a project. The top-most
+-- match has precedence.
 projectRootTopMarkFiles :: Vector FilePath
 projectRootTopMarkFiles =
   V.fromList
@@ -78,6 +87,8 @@ projectRootTopMarkFiles =
     , "_darcs"      -- Darcs VCS root dir
     ]
 
+-- | A list of files considered to mark the root of a project. This
+-- file must be in all sub-directories of a project.
 projectRecurringMarkFiles :: Vector FilePath
 projectRecurringMarkFiles =
   V.fromList
@@ -87,11 +98,13 @@ projectRecurringMarkFiles =
     , "Makefile"
     ]
 
+-- | Iterate from the current path to parent paths until the match function
+-- returns a value for finishing the traversal
 locateDominatingFile
   :: (MonadIO m, MonadThrow m)
-  => Path Abs Dir
-  -> (Path Abs Dir -> m WalkAction)
-  -> m (Path Abs Dir)
+  => Path Abs Dir                   -- ^ Directory to start from
+  -> (Path Abs Dir -> m WalkAction) -- ^ Match function that will return what to do next on the iteration
+  -> m (Path Abs Dir)               -- ^ The path where the match function returns @WalkFinish@
 locateDominatingFile dir continueP
   | isRoot dir =
     throwM ProjectRootNotFound
@@ -106,10 +119,12 @@ locateDominatingFile dir continueP
       WalkContinue ->
         locateDominatingFile (parent dir) continueP
 
+-- | Returns a @WalkAction@ that indicates a finish of iteration when any of the
+-- given relative paths is contained on the given directory
 doesContainAny
   :: MonadIO m
-  => Vector (Path Rel t)
-  -> Path b Dir
+  => Vector (Path Rel t) -- ^ Relative path that should be contained in directory input
+  -> Path b Dir          -- ^ Directory path that should contain any of the relative paths
   -> m WalkAction
 doesContainAny files dir = do
   matchesAnyFile <-
@@ -126,7 +141,9 @@ getDirWithRootProjectFile
   => Path Abs Dir
   -> m (Path Abs Dir)
 getDirWithRootProjectFile currentDir = do
-  files <- mapM parseRelFile (projectRootTopMarkFiles <> projectRootTopLangMarkFiles)
+  files <-
+    mapM parseRelFile (projectRootTopMarkFiles
+                       <> projectRootTopLangMarkFiles)
   locateDominatingFile currentDir (doesContainAny files)
 
 getDirWithRecurringProjectFile
@@ -154,10 +171,13 @@ getDirWithRecurringProjectFile currentDir =
     files <- mapM parseRelFile projectRecurringMarkFiles
     locateDominatingFile currentDir (parentDoesNotContainOneOf files)
 
+-- | Retrieves the root of the current project if available.
+-- A @ProjectRootNotFound@ error is returned otherwise.
+--
 getProjectRootDir
   :: (MonadCatch m, Alternative m, MonadIO m)
-  => Path Abs Dir
-  -> m (Path Abs Dir)
+  => Path Abs Dir      -- ^ Directory from where to look the root of the project
+  -> m (Path Abs Dir)  -- ^ Root of the project directory
 getProjectRootDir dir =
   catch (getDirWithRecurringProjectFile dir)
         (\(_ :: ProjectileException) -> getDirWithRootProjectFile dir)
