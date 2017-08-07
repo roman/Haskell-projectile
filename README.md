@@ -18,7 +18,7 @@ the purpose of reliably access to _project_ resources in a somewhat unified way 
 tools or [Turtle](https://github.com/Gabriel439/Haskell-Turtle-Library) scripts.
 
 ## Development
-[![Build Status](https://travis-ci.org/{{/github-username}}/Haskell-projectile}.svg?branch=master)](https://travis-ci.org/{{/github-username}}/Haskell-{{name}})
+[![Build Status](https://travis-ci.org/roman/Haskell-projectile}.svg?branch=master)](https://travis-ci.org/roman/Haskell-projectile)
 [![Hackage Dependencies](https://img.shields.io/hackage-deps/v/projectile.svg)](https://http://packdeps.haskellers.com/feed?needle=projectile)
 [![Github](https://img.shields.io/github/commits-since/roman/haskell-projectile/v0.0.0.1.svg)](https://img.shields.io/github/commits-since/roman/haskell-projectile/v0.0.0.1.svg)
 
