@@ -12,7 +12,6 @@ module Projectile (getProjectRootDir) where
 
 import Protolude hiding (catch, (<>))
 
-import Control.DeepSeq        (NFData)
 import Control.Exception.Safe (MonadCatch, MonadThrow, catch, throwM)
 import Data.Monoid            ((<>))
 import Data.Vector            (Vector)
@@ -176,7 +175,7 @@ getDirWithRecurringProjectFile currentDir =
 -- A @ProjectRootNotFound@ error is returned otherwise.
 --
 getProjectRootDir
-  :: (MonadCatch m, Alternative m, MonadIO m)
+  :: (MonadCatch m, MonadIO m)
   => Path Abs Dir      -- ^ Directory from where to look the root of the project
   -> m (Path Abs Dir)  -- ^ Root of the project directory
 getProjectRootDir dir =

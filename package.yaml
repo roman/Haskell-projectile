@@ -16,7 +16,6 @@ ghc-options:
 # https://functor.tokyo/blog/2017-07-28-ghc-warnings-you-should-enable
 - -fwarn-incomplete-uni-patterns
 - -fwarn-incomplete-record-updates
-- -O2
 dependencies:
 - base            >=4.8 && <5.0
 - protolude       >=0.1 && <0.2
