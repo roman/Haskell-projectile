@@ -3,7 +3,7 @@
 [![Stackage Nightly](http://stackage.org/package/projectile/badge/nightly)](http://stackage.org/nightly/package/projectile)
 # Projectile
 
-> Utility functions to gather information about a project directories
+> Utility functions to gather information about project directories
 
 ## Table Of Contents
 

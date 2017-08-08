@@ -1,4 +1,5 @@
 name: projectile
+description: Utility functions to gather information about project directories
 version: '0.0.0.1'
 category: TODO
 author: Roman Gonzalez
@@ -7,6 +8,8 @@ copyright: © 2017 Roman Gonzalez
 license: MIT
 github: roman/Haskell-projectile
 tested-with: GHC==7.10.3 GHC==8.0.1 GHC==8.0.2
+synopsis:
+  Go to README.md
 extra-source-files:
 - README.md
 - CHANGELOG.md
