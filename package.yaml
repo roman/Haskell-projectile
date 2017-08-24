@@ -13,6 +13,8 @@ synopsis:
 extra-source-files:
 - README.md
 - CHANGELOG.md
+- test/fixtures/**/.keep
+- test/fixtures/**/.projectile
 ghc-options:
 - -Wall
 # as recommended in:
