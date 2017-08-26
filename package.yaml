@@ -1,6 +1,6 @@
 name: projectile
 description: Utility functions to gather information about project directories
-version: '0.0.0.1'
+version: '0.0.0.2'
 category: TODO
 author: Roman Gonzalez
 maintainer: romanandreg@gmail.com

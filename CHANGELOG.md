@@ -6,7 +6,7 @@ The change log is available [on GitHub][2].
 [1]: http://semver.org/spec/v2.0.0.html
 [2]: https://github.com/roman/projectile/releases
 
-## Unreleased
+## v0.0.0.2
 
 * Bump versions for `path`, `path-io`, and `protolude`
 
