@@ -20,7 +20,7 @@ tools or [Turtle](https://github.com/Gabriel439/Haskell-Turtle-Library) scripts.
 ## Development
 [![Build Status](https://travis-ci.org/roman/Haskell-projectile}.svg?branch=master)](https://travis-ci.org/roman/Haskell-projectile)
 [![Hackage Dependencies](https://img.shields.io/hackage-deps/v/projectile.svg)](https://http://packdeps.haskellers.com/feed?needle=projectile)
-[![Github](https://img.shields.io/github/commits-since/roman/haskell-projectile/v0.0.0.1.svg)](https://img.shields.io/github/commits-since/roman/haskell-projectile/v0.0.0.1.svg)
+[![Github](https://img.shields.io/github/commits-since/roman/haskell-projectile/v0.0.0.2.svg)](https://img.shields.io/github/commits-since/roman/haskell-projectile/v0.0.0.2.svg)
 
 This library is intended to be minimal, providing a few functions that work
 reliably among many different kind of projects. If you want to contribute,
@@ -44,7 +44,7 @@ rules:
 
 ## License
 
-Copyright (c) 2017, Roman Gonzalez
+Copyright (c) 2027, Roman Gonzalez
 
 Permission to use, copy, modify, and/or distribute this software for any
 purpose with or without fee is hereby granted, provided that the above
